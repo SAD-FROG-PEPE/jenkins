@@ -8,21 +8,20 @@ pipeline {
                 }
             }
 
-        stage('Build') {
-            steps {
-                sh 'javac Main.java'
-            }
-
-        stage('Run') {
+       stage('Build') {
             steps {
                 script {
+                    sh 'javac Main.java'
                     sh 'java Main'
+                    sh 'jar cfe Main.txt Main Main.class'
                 }
             }
+        }
 
-            post {
-                success {
-                    archiveArtifacts artifacts: 'main_out', fingerprint: true
+        stage('Archive') {
+            steps {
+                script {
+                    archiveArtifacts artifacts: 'Main.txt', fingerprint: true
                 }
             }
         }

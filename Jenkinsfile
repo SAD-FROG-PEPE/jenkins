@@ -21,7 +21,7 @@ pipeline {
         stage('Archive') {
             steps {
                 script {
-                    archiveArtifacts artifacts: 'Main.txt', fingerprint: true
+                    archiveArtifacts 'target/*.jar'
                 }
             }
         }

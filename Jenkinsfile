@@ -13,7 +13,7 @@ pipeline {
                 script {
                     sh 'javac Main.java'
                     sh 'java Main'
-                    sh 'jar cfe Main.txt Main Main.class'
+                    sh 'jar cfe Main.jar Main Main.class'
                 }
             }
         }
@@ -21,7 +21,7 @@ pipeline {
         stage('Archive') {
             steps {
                 script {
-                    archiveArtifacts 'target/*.jar'
+                    archiveArtifacts artifacts: 'Main.jar', fingerprint: true
                 }
             }
         }
